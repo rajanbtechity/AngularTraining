@@ -1,2 +1,9 @@
 1. polyfills
 2. babel
+3. Module Formatter- Standard way to write code- AMD, CommonJS,UMD
+4. Module loader - Simply a library for teaching browser about module formatter.
+Require.js, System.js
+5. Module bundler - Its a node module , just download and install it.
+It will take 1 js file  as an input , scan through all dependencies and generate one bundle.
+
+npm install webpack-cli -g
