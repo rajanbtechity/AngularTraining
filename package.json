@@ -1,0 +1,13 @@
+{
+    "name": "name",
+    "description": "description",
+    "authors": "author",
+    "version": "1.0.0",
+    "main": "pathToMain",
+    "scripts": {
+        "build": "tsc TestTS.ts"
+    },
+    "dependencies": {
+        "typescript": "^3.3.3333"
+    }
+}
