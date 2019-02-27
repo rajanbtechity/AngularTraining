@@ -1,0 +1,24 @@
+
+<div *ngIf="isA">
+    This is A
+    <input type="Button" value="Show B" (click)="ChangeToB()">
+    </div>
+
+
+    <div *ngIf="isB">
+        This is B
+            <input type="Button" Value="Show A" (click)="ChangeToA()">
+            </div>
+
+<!--
+<div [hidden]="isA">
+                This is A
+                <input type="Button" value="Show B" (click)="ChangeToB()">
+                </div>
+            
+            
+                <div [hidden]="!isA">
+                    This is B
+                        <input type="Button" Value="Show A" (click)="ChangeToA()">
+                        </div>                    
+-->

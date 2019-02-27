@@ -1,3 +1,8 @@
 <h1>Employee Works</h1>
-<employee-add></employee-add>
-<employee-list></employee-list>
+<div [hidden]="isHidden">
+<employee-list (listHiddenOutVar)="toggleHidden()" [Employees]="MyEmployees"></employee-list>
+</div>
+
+<div [hidden]="!isHidden">
+<employee-add (addHiddenOutVar)="toggleHidden()" (Save)="SaveEmployee($event)"></employee-add>
+</div>
