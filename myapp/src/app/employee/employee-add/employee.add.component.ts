@@ -1,11 +1,14 @@
 import { Component,EventEmitter, Output } from '@angular/core';
 import { Employee } from 'src/app/models/employee';
+import { FormControl, Validators, FormGroup } from '@angular/forms';
 
 @Component({
     selector:"employee-add",
     templateUrl:"./employee.add.component.html"
 
 })
+
+/*
 export class EmployeeAddComponent
 {
     emp:Employee;
@@ -51,5 +54,28 @@ export class EmployeeAddComponent
 
     }
 
+
+}
+*/
+export class EmployeeAddComponent{
+    Emp:Employee = new Employee('F','L',0);
+
+MyForm: FormGroup=new FormGroup({
+    FName:new FormControl('',Validators.required),
+    LName:new FormControl(''),
+    Age:new FormControl()
+});
+
+    @Output() Cancel:EventEmitter<void>= new EventEmitter<void>();
+    @Output() Save:EventEmitter<Employee>=new EventEmitter<Employee>();
+
+    HideAddNew(){
+        this.Cancel.emit();
+    }
+
+    SaveEmployee(){
+        const e:Employee=new Employee(this.MyForm.value.FName,this.MyForm.value.LName,this.MyForm.value.Age);
+        this.Save.emit(e)
+    }
 
 }

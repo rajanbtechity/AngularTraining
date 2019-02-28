@@ -1,5 +1,5 @@
 export class Employee{
-    constructor(private Fname:String,private Lname:String,private Age:number)
+    constructor(public Fname:String,public Lname:String,public Age:number)
     {
 
     }

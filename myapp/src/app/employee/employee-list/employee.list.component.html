@@ -5,7 +5,7 @@
     <th>LName</th>
     <th>Age</th>
     <tr *ngFor="let x of Employees">
-        <td>{{x.Fname}}</td>
+        <td>{{x.Fname | concat:'-':x.Lname:'-':x.Age}}</td>
         <td>{{x.Lname}}</td>
         <td>{{x.Age}}</td>            
         </tr>

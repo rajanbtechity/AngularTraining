@@ -1,7 +1,10 @@
 import {Employee} from '../models/employee';
-import { Output } from '@angular/core';
+import { Output, Injectable } from '@angular/core';
 import {EventEmitter} from '@angular/core';
-
+import { Observable} from 'rxjs';
+import { HttpClient } from '@angular/common/http'; 
+import {map} from 'rxjs/operators';
+/*
 
 export class EmployeeService
 {
@@ -17,16 +20,61 @@ export class EmployeeService
         return this.MyEmployees;
 
     }
+*/
 
-    SaveEmployee(e:Employee)
+export class EmployeeService
+{
+    private MyEmployees:Array<Employee>;
+    OnEmployeeUpdate:EventEmitter<void>=new EventEmitter<void>();
+
+    constructor(private http:HttpClient)
     {
-        this.MyEmployees.push(e);
-        this.OnEmployeeUpdate.emit();
+
     }
 
-    UpdateEmployee()
+/*
+    GetEmployees():Observable<any>
     {
-        this.OnEmployeeUpdate.emit();
+        const URL="http://demoapi.justcompile.com/api/employee"
+        return this.http.get(URL);
     }
-    
+    */
+
+GetEmployees():Observable<Array<Employee>>
+{
+    const URL="http://demoapi.justcompile.com/api/employee"
+        return this.http.get(URL).pipe(
+            map((x:Array<any>)=>
+            {
+                return x.map(y=> new Employee(y.fName,y.lName,y.age));
+            }
+
+            )
+        );
 }
+
+
+SaveEmployee(e:Employee)
+{
+    /*
+    this.MyEmployees.push(e);
+    this.OnEmployeeUpdate.emit();
+    */
+
+    const URL="http://demoapi.justcompile.com/api/employee";
+    const newEmployee={fName:e.Fname,lName:e.Lname,age:e.Age};
+
+    return this.http.post(URL,newEmployee).subscribe(()=>{
+            this.OnEmployeeUpdate.emit();
+        }
+    );
+}
+
+UpdateEmployee()
+{
+    this.OnEmployeeUpdate.emit();
+}
+
+}
+   
+    

@@ -1,8 +1,11 @@
-<h1>Employee Add works, Fname:{{emp.Fname}}, Last Name:{{emp.Lname}}, Age :{{emp.Age}}</h1>
-<input type="button" value="Cancel" (click)="ShowList()">
+<h1>Employee Add works</h1>
+
+<!--
+    <input type="button" value="Cancel" (click)="ShowList()">
 <input type="button" value="Save" (click)="SaveEmployee()">
 <input type="button" value="Update" (click)="SaveEmployee()">
-<!--
+
+
 <h1>Var1 value:{{var1}}</h1>
 <input type="text" value={{var1}}/>
 <input type="button" value="Click Me" (click)="changeValue()">
@@ -25,3 +28,41 @@
 <input type="button" value="Show Number 1" (click)="togglehiddenVar()">
 </div>
 -->
+
+<!--
+<form #myForm="ngForm">
+FName:<input type='text' [(ngModel)]="Emp.Fname" name="Fname" required #F="ngModel"><br>
+<span *ngIf="F.dirty && F.invalid">Please enter First Name</span>
+
+<br>
+LName:<input type='text' [(ngModel)]="Emp.Lname" #L name="Lname">{{L.className}}<br>
+Age:<input type='text' [(ngModel)]="Emp.Age" #A>{{A.className}}<br>
+
+<input type="button" value="Save" (click)="SaveEmployee()" [disabled]="myForm.form.invalid">
+<input type="button" value="Cancel" (click)="HideAddNew()">
+</form>
+<p>Employee Add</p>
+-->
+<!--
+FName:<input type='text' [formControl]="FName" name="FName"><br>
+<span> Please enter First Name</span>
+
+<br>
+LName:<input type="text" [formControl]="LName name="LName"><br>
+Age: <input type="text" name="Age"><br>
+
+<input type="button" value="Save" (click)="SaveEmployee()">
+<input type="button" value="Cancel" (click)="HideAddNew()">
+-->
+
+<form [formGroup]="MyForm">
+    FName:<input type='text' formControlName="FName" name="FName"><br>
+    <span *ngIf="MyForm.controls.FName.invalid">Please enter First Name</span>
+    
+    <br>
+    LName:<input type='text' formControlName="LName" name="LName"><br>
+    Age:<input type='text' formControlName="Age" name="Age"><br>
+    
+    <input type="button" value="Save" (click)="SaveEmployee()" [disabled]="myForm.form.invalid">
+    <input type="button" value="Cancel" (click)="HideAddNew()">
+    </form>

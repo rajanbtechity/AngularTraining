@@ -31,13 +31,35 @@ export class EmployeeComponent implements OnInit
 
     constructor(private eService:EmployeeService,private e:TestingService)
     {
-       
+       e.increment();
 
     }
 
     ngOnInit():void{
         const s=this.title;
         this.isHidden=false;
+
+        /*
+
+        this.eService.GetEmployees().subscribe(x=>
+            {
+                this.MyEmployees=x
+            });
+        */
+       /*
+this.eService.GetEmployees().subscribe((x:Array<Employee>)=>
+{
+    this.MyEmployees=x;
+}
+*/
+this.RefreshEmployees();
+this.eService.OnEmployeeUpdate.subscribe(()=>{
+    this.RefreshEmployees();
+});
+
+
+        /*
+
         this.MyEmployees=this.eService.GetEmployees();
         this.eService.OnEmployeeUpdate.subscribe(()=>
         {
@@ -46,7 +68,15 @@ export class EmployeeComponent implements OnInit
 
         }
         );
+*/
+    }
 
+    private RefreshEmployees()
+    {
+        this.eService.GetEmployees().subscribe((x:Array<Employee>)=>
+        {
+            this.MyEmployees=x;
+        });
     }
 
 
